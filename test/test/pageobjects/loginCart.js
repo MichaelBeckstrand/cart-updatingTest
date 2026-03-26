@@ -1,4 +1,4 @@
-import { $ } from '@wdio/globals'
+import { $, expect } from '@wdio/globals'
 import pageUrl from './pageUrl.js';
 import selectors from './selectors.js';
 
@@ -27,8 +27,11 @@ class loginCart extends pageUrl {
       get removeBackpackFromCart () {
         return $('button[class="btn btn_secondary btn_small cart_button"]')
       }
-
-    async addOneItemToCart (username, password) {
+      get clickcontinueShopping () {
+        return $('#continue-shopping')
+      }
+    
+      async addOneItemToCart (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
@@ -40,6 +43,8 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceBackpack).toBeExisting()
         await this.removeBackpackFromCart.click();
         await expect(selectors.referenceCartBadge).not.toBeExisting()
+        await this.clickcontinueShopping.click();
+        await expect(selectors.referenceheader).toBeExisting()
      
 
 
