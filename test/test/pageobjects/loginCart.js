@@ -24,7 +24,9 @@ class loginCart extends pageUrl {
      get clickOnCart () {
         return $('a[class="shopping_cart_link"]')
      }
-
+      get removeBackpackFromCart () {
+        return $('button[class="btn btn_secondary btn_small cart_button"]')
+      }
 
     async addOneItemToCart (username, password) {
         await this.inputUsername.setValue(username);
@@ -36,6 +38,9 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceCartBadge).toHaveText('1')
         await this.clickOnCart.click();
         await expect(selectors.referenceBackpack).toBeExisting()
+        await this.removeBackpackFromCart.click();
+     
+
 
     }
 
