@@ -21,6 +21,7 @@ class loginCart extends pageUrl {
     get addBackpackToCart () {
        return $('#add-to-cart-sauce-labs-backpack')
      }
+     
 
 
     async addOneItemToCart (username, password) {
@@ -29,6 +30,8 @@ class loginCart extends pageUrl {
         await this.clickbutton.click();
         expect (selectors.referenceheader).toBeExisting()
         await this.addBackpackToCart.click();
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('1')
         
     }
 
