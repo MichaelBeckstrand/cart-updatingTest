@@ -10,6 +10,9 @@ class selectors extends pageUrl {
     get referenceCartBadge () {
         return $('span[class="shopping_cart_badge"]')
     }
+     get referenceBackpack () {
+        return $('#item_4_title_link')
+    }
 }
 
 export default new selectors();

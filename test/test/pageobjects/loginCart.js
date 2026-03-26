@@ -35,6 +35,8 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceCartBadge).toBeExisting()
         await expect(selectors.referenceCartBadge).toHaveText('1')
         await this.clickOnCart.click();
+        await expect(selectors.referenceBackpack).toBeExisting()
+
     }
 
     
