@@ -36,9 +36,16 @@ class loginCart extends pageUrl {
       get removeBackpackFromCart () {
         return $('button[class="btn btn_secondary btn_small cart_button"]')
       }
+      get removeBikeLightFromCart () {
+        return $('#remove-sauce-labs-bike-light')
+       }
+      get removeBoltTShirtFromCart () {
+        return $('#remove-sauce-labs-bolt-t-shirt')
+    }
       get clickcontinueShopping () {
         return $('#continue-shopping')
       }
+    
     
       async addOneItemToCart (username, password) {
         await this.inputUsername.setValue(username);
@@ -70,7 +77,13 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceBackpack).toBeExisting()
         await expect(selectors.referenceBikeLight).toBeExisting()
         await expect(selectors.referenceBoltTShirt).toBeExisting()
-        
+        await this.removeBackpackFromCart.click();
+        await this.removeBikeLightFromCart.click();
+        await this.removeBoltTShirtFromCart.click();
+        await expect(selectors.referenceCartBadge).not.toBeExisting()
+        await this.clickcontinueShopping.click();
+        await expect(selectors.referenceheader).toBeExisting()
+
 }
 
     
