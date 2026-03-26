@@ -39,6 +39,7 @@ class loginCart extends pageUrl {
         await this.clickOnCart.click();
         await expect(selectors.referenceBackpack).toBeExisting()
         await this.removeBackpackFromCart.click();
+        await expect(selectors.referenceCartBadge).not.toBeExisting()
      
 
 
