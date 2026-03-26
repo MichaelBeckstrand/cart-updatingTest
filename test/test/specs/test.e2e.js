@@ -5,8 +5,7 @@ describe('adding one item to cart', () => {
         await loginCart.open()
         await loginCart.addOneItemToCart('standard_user', 'secret_sauce')
 
-        
-})    
+        })    
 })
     
 describe('adding many items to cart', () => {
@@ -15,3 +14,11 @@ describe('adding many items to cart', () => {
         await loginCart.addmanyItemsToCart('standard_user', 'secret_sauce')
 })
     })
+
+describe('adding all items to cart', () => {
+    it('should login with valid credentials and add items to cart', async () => {
+        await loginCart.open()
+        await loginCart.addAllItemsToCart('standard_user', 'secret_sauce')
+})
+    })
+    

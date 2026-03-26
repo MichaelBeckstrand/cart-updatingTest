@@ -27,6 +27,15 @@ class loginCart extends pageUrl {
      get addBoltTShirtToCart () {
         return $('#add-to-cart-sauce-labs-bolt-t-shirt')
      }
+     get addFleeceJacketToCart () {
+        return $('#add-to-cart-sauce-labs-fleece-jacket')
+     }
+     get addOnesieToCart () {
+        return $('#add-to-cart-sauce-labs-onesie')
+     }
+      get addRedTShirtToCart () {
+        return $('button[name="add-to-cart-test.allthethings()-t-shirt-(red)"]')
+     }
 
 
 
@@ -41,7 +50,17 @@ class loginCart extends pageUrl {
        }
       get removeBoltTShirtFromCart () {
         return $('#remove-sauce-labs-bolt-t-shirt')
-    }
+       }
+         get removeFleeceJacketFromCart () {
+            return $('#remove-sauce-labs-fleece-jacket')
+      }
+        get removeOnesieFromCart () {
+        return $('#remove-sauce-labs-onesie')
+        }
+        get removeRedTShirtFromCart () {
+            return $('button[name="remove-test.allthethings()-t-shirt-(red)"]')
+         }
+                     
       get clickcontinueShopping () {
         return $('#continue-shopping')
       }
@@ -83,9 +102,39 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceCartBadge).not.toBeExisting()
         await this.clickcontinueShopping.click();
         await expect(selectors.referenceheader).toBeExisting()
-
-}
-
+        }
+        
+        async addAllItemsToCart (username, password) {
+            await this.inputUsername.setValue(username);
+            await this.inputPassword.setValue(password);
+            await this.clickbutton.click();
+            expect (selectors.referenceheader).toBeExisting()
+            await this.addBackpackToCart.click();
+            await this.addBikeLightToCart.click();
+            await this.addBoltTShirtToCart.click();
+            await this.addFleeceJacketToCart.click();
+            await this.addOnesieToCart.click();
+            await this.addRedTShirtToCart.click();
+            await expect(selectors.referenceCartBadge).toBeExisting()
+            await expect(selectors.referenceCartBadge).toHaveText('6')
+            await this.clickOnCart.click();
+            await expect(selectors.referenceBackpack).toBeExisting()
+            await expect(selectors.referenceBikeLight).toBeExisting()
+            await expect(selectors.referenceBoltTShirt).toBeExisting()
+            await expect(selectors.referenceFleeceJacket).toBeExisting()
+            await expect(selectors.referenceOnesie).toBeExisting()
+            await expect(selectors.referenceRedTShirt).toBeExisting()
+            await this.removeBackpackFromCart.click();
+            await this.removeBikeLightFromCart.click();
+            await this.removeBoltTShirtFromCart.click();
+            await this.removeFleeceJacketFromCart.click();
+            await this.removeOnesieFromCart.click();
+            await this.removeRedTShirtFromCart.click();
+            await expect(selectors.referenceCartBadge).not.toBeExisting()
+            await this.clickcontinueShopping.click();
+            await expect(selectors.referenceheader).toBeExisting()
+    
+} 
     
     open () {
         return super.open('login');

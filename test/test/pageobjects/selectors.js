@@ -19,6 +19,15 @@ class selectors extends pageUrl {
     get referenceBoltTShirt () {
         return $('#item_1_title_link')
      }
+     get referenceFleeceJacket () {
+        return $('#item_5_title_link')
+     }
+     get referenceOnesie () {
+        return $('#item_2_title_link')
+     }
+      get referenceRedTShirt () {
+        return $('#item_3_title_link')
+     }  
 }
 
 export default new selectors();
