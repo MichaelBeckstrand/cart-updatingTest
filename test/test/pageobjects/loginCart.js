@@ -64,12 +64,13 @@ class loginCart extends pageUrl {
         await this.addBackpackToCart.click();
         await this.addBikeLightToCart.click();
         await this.addBoltTShirtToCart.click();
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('3')
+        await this.clickOnCart.click();
         await expect(selectors.referenceBackpack).toBeExisting()
         await expect(selectors.referenceBikeLight).toBeExisting()
         await expect(selectors.referenceBoltTShirt).toBeExisting()
-        await expect(selectors.referenceCartBadge).toBeExisting()
-        await expect(selectors.referenceCartBadge).toHaveText('3')
-
+        
 }
 
     
