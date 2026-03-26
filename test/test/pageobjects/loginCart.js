@@ -21,6 +21,15 @@ class loginCart extends pageUrl {
     get addBackpackToCart () {
        return $('#add-to-cart-sauce-labs-backpack')
      }
+    get addBikeLightToCart () {
+        return $('#add-to-cart-sauce-labs-bike-light')
+     }
+     get addBoltTShirtToCart () {
+        return $('#add-to-cart-sauce-labs-bolt-t-shirt')
+     }
+
+
+
      get clickOnCart () {
         return $('a[class="shopping_cart_link"]')
      }
@@ -45,10 +54,23 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceCartBadge).not.toBeExisting()
         await this.clickcontinueShopping.click();
         await expect(selectors.referenceheader).toBeExisting()
+      }
      
+       async addmanyItemsToCart (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        expect (selectors.referenceheader).toBeExisting()
+        await this.addBackpackToCart.click();
+        await this.addBikeLightToCart.click();
+        await this.addBoltTShirtToCart.click();
+        await expect(selectors.referenceBackpack).toBeExisting()
+        await expect(selectors.referenceBikeLight).toBeExisting()
+        await expect(selectors.referenceBoltTShirt).toBeExisting()
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('3')
 
-
-    }
+}
 
     
     open () {

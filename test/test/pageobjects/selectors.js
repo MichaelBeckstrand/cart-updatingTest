@@ -13,6 +13,12 @@ class selectors extends pageUrl {
      get referenceBackpack () {
         return $('#item_4_title_link')
     }
+    get referenceBikeLight () {
+        return $('#item_0_title_link')
+    }
+    get referenceBoltTShirt () {
+        return $('#item_1_title_link')
+     }
 }
 
 export default new selectors();
