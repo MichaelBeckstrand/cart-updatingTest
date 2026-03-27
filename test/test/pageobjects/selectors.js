@@ -28,7 +28,13 @@ class selectors extends pageUrl {
       get referenceRedTShirt () {
         return $('#item_3_title_link')
      }  
-    
+    get clickOnAllItems () {
+        return $('#inventory_sidebar_link')
+     }
+     get clickOnHamburgerMenu () {
+        return $('#react-burger-menu-btn')
+     
+      }
 }
 
 export default new selectors();

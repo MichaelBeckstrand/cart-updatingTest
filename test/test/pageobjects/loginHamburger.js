@@ -40,8 +40,13 @@ class loginhamburger extends pageUrl {
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
         await expect(selectors.referenceheader).toBeExisting()
-
+        await expect(selectors.clickOnHamburgerMenu).toBeExisting()
         await this.clickOnHamburgerMenu.click()
+        await expect(selectors.clickOnAllItems).toBeExisting()
+        await this.clickOnAllItems.click()
+       
+
+
       
  }
 
