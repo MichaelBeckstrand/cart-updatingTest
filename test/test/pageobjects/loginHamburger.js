@@ -35,6 +35,9 @@ class loginhamburger extends pageUrl {
         return $('#react-burger-menu-btn')
      
       }
+      get clickOnBackpack () {
+        return $('#item_4_title_link')
+     }
        async clickingOnAllItems (username, password) { 
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
@@ -44,6 +47,18 @@ class loginhamburger extends pageUrl {
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnAllItems).toBeExisting()
         await this.clickOnAllItems.click()
+        await this.clickOnBackpack.click()
+        expect(selectors.referenceBackpackPage).toBeExisting()
+        expect(selectors.referenceBackpackPage).toHaveText('Sauce Labs Backpack')
+        await expect(selectors.clickOnHamburgerMenu).toBeExisting()
+        await this.clickOnHamburgerMenu.click()
+        await expect(selectors.clickOnAllItems).toBeExisting()
+        await this.clickOnAllItems.click()
+        expect(selectors.referenceheader).toBeExisting()
+        expect(selectors.referenceheader).toHaveText('Products')
+
+
+
        
 
 
