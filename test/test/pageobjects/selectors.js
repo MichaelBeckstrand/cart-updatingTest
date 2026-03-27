@@ -28,6 +28,7 @@ class selectors extends pageUrl {
       get referenceRedTShirt () {
         return $('#item_3_title_link')
      }  
+    
 }
 
 export default new selectors();

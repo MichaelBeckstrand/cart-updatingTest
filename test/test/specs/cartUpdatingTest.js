@@ -20,4 +20,4 @@ describe('adding one item to cart', () => {
 })
     
     
-    //Positive and Stress test
+    //Positive and CRUD test

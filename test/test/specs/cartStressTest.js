@@ -7,4 +7,4 @@ describe('adding one item to cart multiple times', () => {
    })
 })
     
-//performace test 
+//Performance test 
