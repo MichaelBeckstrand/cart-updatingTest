@@ -1,4 +1,4 @@
-import { $, expect } from '@wdio/globals'
+import { $, browser, expect } from '@wdio/globals'
 import pageUrl from './pageUrl.js';
 import selectors from './selectors.js';
 
@@ -35,6 +35,7 @@ class loginhamburger extends pageUrl {
         return $('#react-burger-menu-btn')
      
       }
+      
       get clickOnBackpack () {
         return $('#item_4_title_link')
      }
@@ -55,16 +56,20 @@ class loginhamburger extends pageUrl {
         await expect(selectors.clickOnAllItems).toBeExisting()
         await this.clickOnAllItems.click()
         expect(selectors.referenceheader).toBeExisting()
-        expect(selectors.referenceheader).toHaveText('Products')
-
-
-
-       
-
-
-      
- }
-
+        expect(selectors.referenceheader).toHaveText('Swag Labs')
+}
+   async clickingOnAbout (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(selectors.referenceheader).toBeExisting()
+        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await expect(selectors.clickOnHamburgerMenu).toBeExisting()
+        await this.clickOnHamburgerMenu.click()
+        await expect(selectors.clickOnAbout).toBeExisting()
+        await this.clickOnAbout.click()
+        await expect(browser).toHaveUrl('https://saucelabs.com/')
+      }
     
     open ()   {
         return super.open('login');
