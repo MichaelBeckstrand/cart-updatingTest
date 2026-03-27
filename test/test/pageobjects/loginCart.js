@@ -65,6 +65,16 @@ class loginCart extends pageUrl {
         return $('#continue-shopping')
       }
     
+      loginOnceAddItemLoop (username, password) {
+        this.inputUsername.setValue(username);
+        this.inputPassword.setValue(password);
+        this.clickbutton.click();
+        expect (selectors.referenceheader).toBeExisting()
+        for (let i = 0; i < 100; i++) {
+            this.addBackpackToCart.click();
+            this.removeBackpackFromCart.click();
+        }
+      }
     
       async addOneItemToCart (username, password) {
         await this.inputUsername.setValue(username);
@@ -133,10 +143,9 @@ class loginCart extends pageUrl {
             await expect(selectors.referenceCartBadge).not.toBeExisting()
             await this.clickcontinueShopping.click();
             await expect(selectors.referenceheader).toBeExisting()
+    } 
     
-} 
-    
-    open () {
+    open ()   {
         return super.open('login');
     }
 }

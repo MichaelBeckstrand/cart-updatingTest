@@ -8,17 +8,16 @@ describe('adding one item to cart', () => {
         })    
 })
     
-describe('adding many items to cart', () => {
-    it('should login with valid credentials and add items to cart', async () => {
+    it('should login with valid credentials and add many items to cart', async () => {
         await loginCart.open()
         await loginCart.addmanyItemsToCart('standard_user', 'secret_sauce')
 })
-    })
+    
 
-describe('adding all items to cart', () => {
-    it('should login with valid credentials and add items to cart', async () => {
+    it('should login with valid credentials and add all items to cart', async () => {
         await loginCart.open()
         await loginCart.addAllItemsToCart('standard_user', 'secret_sauce')
 })
-    })
     
+    
+    //Positive and Stress test
