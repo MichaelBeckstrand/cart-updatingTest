@@ -70,7 +70,19 @@ class loginhamburger extends pageUrl {
         await this.clickOnAbout.click()
         await expect(browser).toHaveUrl('https://saucelabs.com/')
       }
-    
+    async clickingOnLogout (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(selectors.referenceheader).toBeExisting()
+        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await expect(selectors.clickOnHamburgerMenu).toBeExisting()
+        await this.clickOnHamburgerMenu.click()
+        await expect(selectors.clickOnLogout).toBeExisting()
+        await this.clickOnLogout.click()
+        await browser.back()
+
+    }
     open ()   {
         return super.open('login');
     }

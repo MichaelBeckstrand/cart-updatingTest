@@ -41,6 +41,9 @@ class selectors extends pageUrl {
       get clickOnAbout () {
         return $('#about_sidebar_link')
      }
+        get clickOnLogout () {  
+        return $('#logout_sidebar_link')
+        }
 
 }   
 
