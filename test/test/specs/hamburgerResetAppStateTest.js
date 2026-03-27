@@ -1,11 +1,10 @@
 import loginhamburger from '../pageobjects/loginHamburger.js';
 
-describe('Selecting About', () => {
+describe('Selecting Logout', () => {
     it('should login with valid credentials', async () => {
         await loginhamburger.open()
-        await loginhamburger.clickingOnAbout('standard_user', 'secret_sauce')
+        await loginhamburger.clickingOnResetAppState('standard_user', 'secret_sauce')
  })    
 })
     
     
-//positive test 

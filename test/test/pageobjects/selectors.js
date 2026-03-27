@@ -36,15 +36,17 @@ class selectors extends pageUrl {
      }
       get clickOnHamburgerMenu () {
         return $('#react-burger-menu-btn')
-     
-      }
-      get clickOnAbout () {
+        }
+      get clickOnResetAppState () {
+        return $('#reset_sidebar_link')
+     }      
+       get clickOnAbout () {
         return $('#about_sidebar_link')
      }
         get clickOnLogout () {  
         return $('#logout_sidebar_link')
         }
 
-}   
+}       
 
 export default new selectors();

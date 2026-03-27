@@ -17,6 +17,10 @@ class loginhamburger extends pageUrl {
     get clickbutton () {
         return $('input[type="submit"]');
         }
+
+        get addBackpackToCart () {
+       return $('#add-to-cart-sauce-labs-backpack')
+     }
     
   
      get clickOnAllItems () {
@@ -82,6 +86,22 @@ class loginhamburger extends pageUrl {
         await this.clickOnLogout.click()
         await browser.back()
 
+    }
+    async clickingOnResetAppState (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(selectors.referenceheader).toBeExisting()
+        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await this.addBackpackToCart.click();
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('1')
+        await expect(selectors.clickOnHamburgerMenu).toBeExisting()
+        await this.clickOnHamburgerMenu.click()
+        await expect(selectors.clickOnResetAppState).toBeExisting()
+        await this.clickOnResetAppState.click()
+        await browser.refresh()
+      
     }
     open ()   {
         return super.open('login');
