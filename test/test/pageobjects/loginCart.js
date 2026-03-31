@@ -6,22 +6,22 @@ import selectors from './selectors.js';
 
 class loginCart extends pageUrl {
     
-    get inputUsername () {
+     get inputUsername () {
         return $('#user-name');
     }
 
-    get inputPassword () {
+     get inputPassword () {
         return $('#password');
     }
 
-    get clickbutton () {
+     get clickbutton () {
         return $('input[type="submit"]');
         }
     
-    get addBackpackToCart () {
+     get addBackpackToCart () {
        return $('#add-to-cart-sauce-labs-backpack')
      }
-    get addBikeLightToCart () {
+     get addBikeLightToCart () {
         return $('#add-to-cart-sauce-labs-bike-light')
      }
      get addBoltTShirtToCart () {
@@ -33,13 +33,13 @@ class loginCart extends pageUrl {
      get addOnesieToCart () {
         return $('#add-to-cart-sauce-labs-onesie')
      }
-      get addRedTShirtToCart () {
+     get addRedTShirtToCart () {
         return $('button[name="add-to-cart-test.allthethings()-t-shirt-(red)"]')
      }
 
 
 
-     get clickOnCart () {
+      get clickOnCart () {
         return $('a[class="shopping_cart_link"]')
      }
       get removeBackpackFromCart () {
@@ -51,19 +51,26 @@ class loginCart extends pageUrl {
       get removeBoltTShirtFromCart () {
         return $('#remove-sauce-labs-bolt-t-shirt')
        }
-         get removeFleeceJacketFromCart () {
+      get removeFleeceJacketFromCart () {
             return $('#remove-sauce-labs-fleece-jacket')
       }
-        get removeOnesieFromCart () {
+      get removeOnesieFromCart () {
         return $('#remove-sauce-labs-onesie')
         }
-        get removeRedTShirtFromCart () {
+      get removeRedTShirtFromCart () {
             return $('button[name="remove-test.allthethings()-t-shirt-(red)"]')
          }
                      
       get clickcontinueShopping () {
         return $('#continue-shopping')
       }
+      get clickOnHamburgerMenu () {
+        return $('#react-burger-menu-btn')
+     
+      }
+      get clickOnLogout () {
+        return $('#logout_sidebar_link')
+     }
     
       loginOnceAddItemLoop (username, password) {
         this.inputUsername.setValue(username);
@@ -80,7 +87,7 @@ class loginCart extends pageUrl {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        expect (selectors.referenceheader).toBeExisting()
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await this.addBackpackToCart.click();
         await expect(selectors.referenceCartBadge).toBeExisting()
         await expect(selectors.referenceCartBadge).toHaveText('1')
@@ -89,14 +96,14 @@ class loginCart extends pageUrl {
         await this.removeBackpackFromCart.click();
         await expect(selectors.referenceCartBadge).not.toBeExisting()
         await this.clickcontinueShopping.click();
-        await expect(selectors.referenceheader).toBeExisting()
+         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
       }
      
        async addmanyItemsToCart (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        expect (selectors.referenceheader).toBeExisting()
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await this.addBackpackToCart.click();
         await this.addBikeLightToCart.click();
         await this.addBoltTShirtToCart.click();
@@ -111,14 +118,14 @@ class loginCart extends pageUrl {
         await this.removeBoltTShirtFromCart.click();
         await expect(selectors.referenceCartBadge).not.toBeExisting()
         await this.clickcontinueShopping.click();
-        await expect(selectors.referenceheader).toBeExisting()
+         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         }
         
         async addAllItemsToCart (username, password) {
             await this.inputUsername.setValue(username);
             await this.inputPassword.setValue(password);
             await this.clickbutton.click();
-            expect (selectors.referenceheader).toBeExisting()
+            await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
             await this.addBackpackToCart.click();
             await this.addBikeLightToCart.click();
             await this.addBoltTShirtToCart.click();
@@ -142,9 +149,28 @@ class loginCart extends pageUrl {
             await this.removeRedTShirtFromCart.click();
             await expect(selectors.referenceCartBadge).not.toBeExisting()
             await this.clickcontinueShopping.click();
-            await expect(selectors.referenceheader).toBeExisting()
+            await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
     } 
-    
+       async addItemLogoutLogin (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        await this.addBackpackToCart.click();
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('1')
+        await this.clickOnHamburgerMenu.click();
+        await expect(selectors.clickOnLogout).toBeExisting()
+        await this.clickOnLogout.click();
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        await expect(selectors.referenceCartBadge).toBeExisting()
+        await expect(selectors.referenceCartBadge).toHaveText('1')
+        
+     }
+
     open ()   {
         return super.open('login');
     }

@@ -39,15 +39,24 @@ class loginhamburger extends pageUrl {
         return $('#react-burger-menu-btn')
      
       }
+      get exitHamburgerMenu () {
+        return $('#react-burger-cross-btn')
+     }
+     get hamburgerMenuOverlay () {
+        return $('div[class="bm-menu"]')
+     }
       
       get clickOnBackpack () {
         return $('#item_4_title_link')
      }
+     get removeBackpack () {
+        return $('#remove-sauce-labs-backpack')
+      }
        async clickingOnAllItems (username, password) { 
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        await expect(selectors.referenceheader).toBeExisting()
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await expect(selectors.clickOnHamburgerMenu).toBeExisting()
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnAllItems).toBeExisting()
@@ -59,15 +68,14 @@ class loginhamburger extends pageUrl {
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnAllItems).toBeExisting()
         await this.clickOnAllItems.click()
-        expect(selectors.referenceheader).toBeExisting()
-        expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+       
 }
    async clickingOnAbout (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        await expect(selectors.referenceheader).toBeExisting()
-        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await expect(selectors.clickOnHamburgerMenu).toBeExisting()
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnAbout).toBeExisting()
@@ -78,8 +86,7 @@ class loginhamburger extends pageUrl {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        await expect(selectors.referenceheader).toBeExisting()
-        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await expect(selectors.clickOnHamburgerMenu).toBeExisting()
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnLogout).toBeExisting()
@@ -91,8 +98,7 @@ class loginhamburger extends pageUrl {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.clickbutton.click();
-        await expect(selectors.referenceheader).toBeExisting()
-        await expect(selectors.referenceheader).toHaveText('Swag Labs')
+         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         await this.addBackpackToCart.click();
         await expect(selectors.referenceCartBadge).toBeExisting()
         await expect(selectors.referenceCartBadge).toHaveText('1')
@@ -101,9 +107,91 @@ class loginhamburger extends pageUrl {
         await expect(selectors.clickOnResetAppState).toBeExisting()
         await this.clickOnResetAppState.click()
         await browser.refresh()
-      
+    
+      }
+     async aboutStressTest (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        for (let i = 0; i < 100; i++) {
+            await this.clickOnHamburgerMenu.click();
+            await expect(selectors.clickOnAbout).toBeExisting()
+            await this.clickOnAbout.click();
+            await expect(browser).toHaveUrl('https://saucelabs.com/')
+            await browser.back();
+            await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        }
+      }
+      async resetAppStateStressTest (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        for (let i = 0; i < 20; i++) {
+            await this.addBackpackToCart.click();
+            await expect(selectors.referenceCartBadge).toBeExisting()
+            await expect(selectors.referenceCartBadge).toHaveText('1')
+            await this.clickOnHamburgerMenu.click();
+            await browser.pause(100)
+            await expect(selectors.clickOnResetAppState).toBeExisting()
+            await this.clickOnResetAppState.click();
+            await expect(selectors.referenceCartBadge).not.toBeExisting()
+            await this.removeBackpack.click();
+            await expect(this.addBackpackToCart).toBeExisting()
+            await this.exitHamburgerMenu.click();
+        }
+      }
+      async allItemsStressTest (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        for (let i = 0; i < 20; i++) {
+          await this.clickOnBackpack.click();
+          await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory-item.html?id=4')
+          await this.clickOnHamburgerMenu.click();
+          await expect(this.clickOnAllItems).toBeExisting()
+          await this.clickOnAllItems.click(); 
+          await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+
+      }  
     }
-    open ()   {
+    async logoutStressTest (username, password) {
+        for (let i = 0; i < 20; i++) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        await this.clickOnHamburgerMenu.click();
+        await expect(this.clickOnLogout).toBeExisting()
+        await this.clickOnLogout.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/')
+        
+        
+    }
+  }
+  async hamburgerOverlayNegitiveTest (username, password) {
+      await this.inputUsername.setValue(username);
+      await this.inputPassword.setValue(password);
+      await this.clickbutton.click();
+      await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html') 
+      await this.clickOnHamburgerMenu.click();
+      this.exitHamburgerMenu.click()
+      try {
+        await this.clickOnHamburgerMenu.click();
+      }
+      catch(error) 
+     { await expect(error.message).toContain('element click intercepted')
+
+  }
+      await expect(this.clickOnHamburgerMenu).toBeExisting()
+      
+      this.exitHamburgerMenu.click()
+    
+    
+  }
+        open ()   {
         return super.open('login');
     }
 }
