@@ -21,9 +21,7 @@ class loginhamburger extends pageUrl {
         get addBackpackToCart () {
        return $('#add-to-cart-sauce-labs-backpack')
      }
-    
-  
-     get clickOnAllItems () {
+        get clickOnAllItems () {
         return $('#inventory_sidebar_link')
      }
       get clickOnAbout () {
@@ -106,7 +104,10 @@ class loginhamburger extends pageUrl {
         await this.clickOnHamburgerMenu.click()
         await expect(selectors.clickOnResetAppState).toBeExisting()
         await this.clickOnResetAppState.click()
+        await expect(selectors.referenceCartBadge).not.toBeExisting()
         await browser.refresh()
+        await expect(this.addBackpackToCart).toBeExisting()
+
     
       }
      async aboutStressTest (username, password) {
@@ -171,6 +172,87 @@ class loginhamburger extends pageUrl {
         
     }
   }
+  async allItemsAcessibilityTest (username, password) {
+    await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.clickbutton.click();
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await expect(this.clickOnHamburgerMenu).toBeFocused();
+    await browser.keys('Enter');
+    await expect(this.clickOnAllItems).toBeExisting();
+    await expect(this.clickOnAllItems).toBeFocused();
+    await browser.keys('Enter');
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+
+}
+    async aboutAcessibilityTest (username, password) {
+    await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.clickbutton.click();
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await expect(this.clickOnHamburgerMenu).toBeFocused();
+    await browser.keys('Enter');
+    await browser.keys('Tab'); 
+    await expect(this.clickOnAbout).toBeExisting();
+    await expect(this.clickOnAbout).toBeFocused();
+    await browser.keys('Enter');
+    await expect(browser).toHaveUrl('https://saucelabs.com/')
+
+     }
+    async logoutAcessibilityTest (username, password) {
+    await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.clickbutton.click();
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await expect(this.clickOnHamburgerMenu).toBeFocused();
+    await browser.keys('Enter');
+    await browser.keys('Tab');
+    await browser.keys('Tab'); 
+    await expect(this.clickOnLogout).toBeExisting();
+    await expect(this.clickOnLogout).toBeFocused();
+    await browser.keys('Enter');
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/')
+    
+
+     }
+    async resetAppStateAcessibilityTest (username, password) {
+    await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.clickbutton.click();
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await expect(this.clickOnHamburgerMenu).toBeFocused();
+    await browser.keys('Enter');
+    await browser.keys('Tab');
+    await browser.keys('Tab'); 
+    await browser.keys('Tab');
+    await expect(this.clickOnResetAppState).toBeExisting();
+    await expect(this.clickOnResetAppState).toBeFocused();
+    await browser.keys('Enter');
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    
+
+     }
+      async hamburgerExitButtonTest (username, password) {
+      await this.inputUsername.setValue(username);
+      await this.inputPassword.setValue(password);
+      await this.clickbutton.click();
+      await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+      for (let i = 0; i < 20; i++) {
+      await this.clickOnHamburgerMenu.waitForClickable({timeout: 5000});
+      await this.clickOnHamburgerMenu.click();
+      await this.exitHamburgerMenu.waitForDisplayed({timeout: 5000});
+      await expect(this.exitHamburgerMenu).toBeExisting()
+      await this.exitHamburgerMenu.waitForClickable({timeout: 5000});
+      await this.exitHamburgerMenu.click();
+      await browser.pause() }
+      await expect(this.exitHamburgerMenu).not.toBeDisplayed()
+      
+}
+
   async hamburgerOverlayNegitiveTest (username, password) {
       await this.inputUsername.setValue(username);
       await this.inputPassword.setValue(password);
@@ -183,14 +265,11 @@ class loginhamburger extends pageUrl {
       }
       catch(error) 
      { await expect(error.message).toContain('element click intercepted')
-
-  }
+}
       await expect(this.clickOnHamburgerMenu).toBeExisting()
       
       this.exitHamburgerMenu.click()
-    
-    
-  }
+    }
         open ()   {
         return super.open('login');
     }

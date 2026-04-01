@@ -28,10 +28,13 @@ class selectors extends pageUrl {
       get referenceRedTShirt () {
         return $('#item_3_title_link')
      }  
-    get referenceBackpackPage () {
+     get referenceBackpackPage () {
         return $('div[class="inventory_details_name large_size"]')
     }
-  get clickOnAllItems () {
+    get referenceMenuWrap() {
+       return $('div[class="bm-menu-wrap"]')
+    }
+      get clickOnAllItems () {
         return $('#inventory_sidebar_link')
      }
       get clickOnHamburgerMenu () {
