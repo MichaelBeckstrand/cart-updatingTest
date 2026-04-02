@@ -18,11 +18,15 @@ import loginCart from '../pageobjects/loginCart.js'
 //         await loginCart.open()
 //         await loginCart.addAllItemsToCart('standard_user', 'secret_sauce')
 // })
-
-// describe('adding one item to cart logout and login again', () => {  
+  
 //     it('should login with valid credentials and add one item to cart, logout and login again', async () => {
 //     await loginCart.open()
 //     await loginCart.addItemLogoutLogin('standard_user', 'secret_sauce')    
 // })
-// })
-    //Positive and CRUD tests
+
+//Positive and CRUD tests
+    
+
+    
+
+    

@@ -17,7 +17,12 @@ import loginhamburger from '../pageobjects/loginHamburger.js';
 
 //positive and stress test 
 
- 
+//  it('should close the hamburger menu with esc key', async () => {
+//     await loginhamburger.open()
+//     await loginhamburger.exitHamburgerMenuAcessibilityTest('standard_user', 'secret_sauce')    
+// })
+
+// keyboard exit hamburger menu with esc accesibility test 
 
     
     

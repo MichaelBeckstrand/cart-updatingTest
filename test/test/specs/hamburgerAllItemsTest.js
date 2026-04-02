@@ -14,7 +14,7 @@ import loginhamburger from '../pageobjects/loginHamburger.js';
 //         await loginhamburger.allItemsStressTest('standard_user', 'secret_sauce')
 //     })  
 
-//     // stress test 
+// stress test 
 
 // it ('should test the accesability of the all items menu option', async () => {
 //     await loginhamburger.open()

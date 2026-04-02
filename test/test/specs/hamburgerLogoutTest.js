@@ -14,11 +14,11 @@ import loginhamburger from '../pageobjects/loginHamburger.js';
 //         await loginhamburger.logoutStressTest('standard_user', 'secret_sauce')
 //     })
 
-// //stress test
+// stress test
 
 // it ('should test the accesability of the logout menu option', async () => {
 // await loginhamburger.open()
 // await loginhamburger.logoutAcessibilityTest('standard_user', 'secret_sauce')  
 // })
     
-//keyboard accessibility all items test 
+// keyboard accessibility all items test 

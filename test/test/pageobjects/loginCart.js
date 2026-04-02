@@ -151,6 +151,22 @@ class loginCart extends pageUrl {
             await this.clickcontinueShopping.click();
             await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
     } 
+    async navigateToCartSecurityTest (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect(this.clickOnCart).toBeExisting();
+        await this.clickOnCart.click();
+        await expect(this.clickOnHamburgerMenu).toBeExisting();
+        await this.clickOnHamburgerMenu.click();
+        await expect(this.clickOnLogout).toBeExisting()
+        await this.clickOnLogout.click();
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/')
+        await browser.url('https://www.saucedemo.com/cart.html')
+        await expect(selectors.referenceCartError).toBeExisting()
+        await expect(selectors.referenceCartError).toHaveText(
+        await expect.stringContaining("Epic sadface: You can only access '/cart.html' when you are logged in."))
+}
        async addItemLogoutLogin (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
@@ -170,6 +186,7 @@ class loginCart extends pageUrl {
         await expect(selectors.referenceCartBadge).toHaveText('1')
         
      }
+     
 
     open ()   {
         return super.open('login');

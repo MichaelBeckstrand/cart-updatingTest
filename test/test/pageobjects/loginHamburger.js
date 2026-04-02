@@ -172,11 +172,32 @@ class loginhamburger extends pageUrl {
         
     }
   }
+  async exitHamburgerMenuAcessibilityTest (username, password) {
+    await this.inputUsername.setValue(username);
+    await this.inputPassword.setValue(password);
+    await this.clickbutton.click();
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await expect(this.clickOnHamburgerMenu).toBeFocused();
+    await browser.keys('Enter');
+    await expect(this.exitHamburgerMenu).toBeDisplayed()
+    await browser.keys('Escape');
+    await browser.pause(500)
+    await expect(this.exitHamburgerMenu).not.toBeDisplayed()
+    
+
+     }
   async allItemsAcessibilityTest (username, password) {
     await this.inputUsername.setValue(username);
     await this.inputPassword.setValue(password);
     await this.clickbutton.click();
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+    await browser.keys('Tab');
+    await browser.keys('Tab');
+    await browser.keys('Tab');
+    await expect(this.clickOnBackpack).toBeFocused
+    await browser.keys('Enter')
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory-item.html?id=4')
     await browser.keys('Tab');
     await expect(this.clickOnHamburgerMenu).toBeFocused();
     await browser.keys('Enter');
@@ -199,6 +220,7 @@ class loginhamburger extends pageUrl {
     await expect(this.clickOnAbout).toBeFocused();
     await browser.keys('Enter');
     await expect(browser).toHaveUrl('https://saucelabs.com/')
+    
 
      }
     async logoutAcessibilityTest (username, password) {
@@ -223,19 +245,31 @@ class loginhamburger extends pageUrl {
     await this.inputPassword.setValue(password);
     await this.clickbutton.click();
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
-    await browser.keys('Tab');
+    for (let i = 0; i < 4; i++) {
+    await browser.keys('Tab')}
+    await expect(this.clickOnBackpack).toBeFocused();
+    await browser.keys('Enter');
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory-item.html?id=4')
+    for (let i = 0; i < 3; i++) {
+    await browser.keys('Tab')}
+    await browser.keys('Enter');
+    await expect(selectors.referenceCartBadge).toBeExisting()
+    await expect(selectors.referenceCartBadge).toHaveText('1')
+    await browser.refresh();
+    await browser.execute(() => document.body.focus());
+    for (let i = 0; i < 8; i++) {
+    await browser.keys('Tab')}
     await expect(this.clickOnHamburgerMenu).toBeFocused();
     await browser.keys('Enter');
-    await browser.keys('Tab');
-    await browser.keys('Tab'); 
-    await browser.keys('Tab');
-    await expect(this.clickOnResetAppState).toBeExisting();
-    await expect(this.clickOnResetAppState).toBeFocused();
-    await browser.keys('Enter');
-    await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
-    
+    await browser.execute(() => document.body.focus());
+    for (let i = 0; i < 3; i++) {
+    await browser.keys('Tab')}
+    await await expect(this.clickOnResetAppState).toBeFocused();
+    await browser.keys('Enter'); 
+    await expect(selectors.referenceCartBadge).not.toBeExisting()
+    await browser.refresh()
 
-     }
+   }
       async hamburgerExitButtonTest (username, password) {
       await this.inputUsername.setValue(username);
       await this.inputPassword.setValue(password);
@@ -244,12 +278,14 @@ class loginhamburger extends pageUrl {
       for (let i = 0; i < 20; i++) {
       await this.clickOnHamburgerMenu.waitForClickable({timeout: 5000});
       await this.clickOnHamburgerMenu.click();
+      await browser.pause(500)
       await this.exitHamburgerMenu.waitForDisplayed({timeout: 5000});
       await expect(this.exitHamburgerMenu).toBeExisting()
       await this.exitHamburgerMenu.waitForClickable({timeout: 5000});
       await this.exitHamburgerMenu.click();
-      await browser.pause() }
-      await expect(this.exitHamburgerMenu).not.toBeDisplayed()
+      await browser.pause(1000) 
+      await expect(this.hamburgerMenuOverlay).not.toBeDisplayed({timeout: 5000})
+      }
       
 }
 
