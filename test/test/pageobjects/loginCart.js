@@ -43,7 +43,7 @@ class loginCart extends pageUrl {
         return $('a[class="shopping_cart_link"]')
      }
       get removeBackpackFromCart () {
-        return $('button[class="btn btn_secondary btn_small cart_button"]')
+        return $('#remove-sauce-labs-backpack')
       }
       get removeBikeLightFromCart () {
         return $('#remove-sauce-labs-bike-light')
@@ -72,14 +72,16 @@ class loginCart extends pageUrl {
         return $('#logout_sidebar_link')
      }
     
-      loginOnceAddItemLoop (username, password) {
-        this.inputUsername.setValue(username);
-        this.inputPassword.setValue(password);
-        this.clickbutton.click();
-        expect (selectors.referenceheader).toBeExisting()
+       async loginOnceAddItemLoop (username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.clickbutton.click();
+        await expect (browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
         for (let i = 0; i < 100; i++) {
-            this.addBackpackToCart.click();
-            this.removeBackpackFromCart.click();
+            await this.addBackpackToCart.waitForDisplayed();
+            await this.addBackpackToCart.click();
+            await this.removeBackpackFromCart.waitForDisplayed();
+            await this.removeBackpackFromCart.click();
         }
       }
     
@@ -96,7 +98,7 @@ class loginCart extends pageUrl {
         await this.removeBackpackFromCart.click();
         await expect(selectors.referenceCartBadge).not.toBeExisting()
         await this.clickcontinueShopping.click();
-         await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
+        await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
       }
      
        async addmanyItemsToCart (username, password) {
@@ -134,7 +136,7 @@ class loginCart extends pageUrl {
             await this.addRedTShirtToCart.click();
             await expect(selectors.referenceCartBadge).toBeExisting()
             await expect(selectors.referenceCartBadge).toHaveText('6')
-            await this.clickOnCart.click();
+            await this.clickOnCart.click(); 
             await expect(selectors.referenceBackpack).toBeExisting()
             await expect(selectors.referenceBikeLight).toBeExisting()
             await expect(selectors.referenceBoltTShirt).toBeExisting()
@@ -160,12 +162,14 @@ class loginCart extends pageUrl {
         await expect(this.clickOnHamburgerMenu).toBeExisting();
         await this.clickOnHamburgerMenu.click();
         await expect(this.clickOnLogout).toBeExisting()
-        await this.clickOnLogout.click();
+        await this.clickOnLogout.waitForDisplayed({ timeout: 5000 });
+        await this.clickOnLogout.waitForClickable();
+        await this.clickOnLogout.click({ force: true });
         await expect(browser).toHaveUrl('https://www.saucedemo.com/')
         await browser.url('https://www.saucedemo.com/cart.html')
         await expect(selectors.referenceCartError).toBeExisting()
         await expect(selectors.referenceCartError).toHaveText(
-        await expect.stringContaining("Epic sadface: You can only access '/cart.html' when you are logged in."))
+         expect.stringContaining("Epic sadface: You can only access '/cart.html' when you are logged in."))
 }
        async addItemLogoutLogin (username, password) {
         await this.inputUsername.setValue(username);

@@ -52,7 +52,9 @@ class selectors extends pageUrl {
         get clickOnLogout () {  
         return $('#logout_sidebar_link')
         }
-        
+        get fullPageLoaded () {
+         return $('#inventory_container')
+        }
 
 }       
 
